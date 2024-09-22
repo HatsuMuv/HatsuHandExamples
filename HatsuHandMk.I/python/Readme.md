@@ -11,12 +11,12 @@ This project provides an example code for controlling a 5-DOF robot hand using a
 - **Exit**: Closes the application.
 
 ## Gif Demo
-![Open&Close Hand](./images/OpenCloseHand.gif)
-
+![Open&Close Hand](./images/OpenClose.gif)
+**Open Hand & Close Hand**
 ![Finger Wave](./images/FingerWave.gif)
-
-![Count Binary Number](./images/CountBinaryNumber.gif)
-
+**Finger Wave**
+![Count Binary Number](./images/CountBinary.gif)
+**Count Binary Number**
 
 
 ## Prerequisites
