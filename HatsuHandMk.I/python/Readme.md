@@ -11,12 +11,17 @@ This project provides an example code for controlling a 5-DOF robot hand using a
 - **Exit**: Closes the application.
 
 ## Gif Demo
-![Open&Close Hand](./images/OpenClose.gif)
-**Open Hand & Close Hand**
+### Open and Close Hand
+This animation demonstrates the robot hand opening and closing, illustrating the range of motion and control capabilities.
+![Open and Close Hand](./images/OpenClose.gif)
+
+### Finger Wave
+The finger wave animation shows how each finger can move independently, mimicking a human-like wave.
 ![Finger Wave](./images/FingerWave.gif)
-**Finger Wave**
+
+### Counting in Binary
+This gif showcases the robot hand counting in binary, a demonstration of precise finger control and coordination.
 ![Count Binary Number](./images/CountBinary.gif)
-**Count Binary Number**
 
 
 ## Prerequisites
