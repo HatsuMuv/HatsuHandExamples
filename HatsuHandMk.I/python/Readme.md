@@ -10,6 +10,15 @@ This project provides an example code for controlling a 5-DOF robot hand using a
 - **Count Binary Number**: Uses finger positions to represent binary digits and count from 1 to 15.
 - **Exit**: Closes the application.
 
+## Gif Demo
+![Open&Close Hand](./images/OpenCloseHand.gif)
+
+![Finger Wave](./images/FingerWave.gif)
+
+![Count Binary Number](./images/CountBinaryNumber.gif)
+
+
+
 ## Prerequisites
 
 - Python 3.x
