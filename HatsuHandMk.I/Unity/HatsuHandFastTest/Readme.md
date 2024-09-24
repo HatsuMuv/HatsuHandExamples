@@ -16,10 +16,11 @@ The demo scene is located at the following path:
 
 - Unity 2020.3 or later
 - [DOTween](http://dotween.demigiant.com/)
+- HatsuHand Mk.I with Maestro USB control interface
 
 ## Usage
 
-This GUI interface is designed to control a robotic hand, offering several functionalities and individual finger adjustments.
+Connect your HatsuHand Mk.I to your PC. And turn on start the program. Use this GUI interface to control a HatsuHand Mk.I with following functionalities and individual finger adjustments.
 
 - **OpenHand**:
   - This button will command the hand to open fully, extending all fingers.
