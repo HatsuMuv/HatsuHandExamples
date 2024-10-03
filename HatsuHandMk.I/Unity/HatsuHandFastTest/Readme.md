@@ -18,6 +18,14 @@ The demo scene is located at the following path:
 - [DOTween](http://dotween.demigiant.com/)
 - HatsuHand Mk.I with Maestro USB control interface
 
+## Project Setup
+
+**Enabling the .NET 4.x scripting runtime in Unity**
+
+To enable the .NET 4.x scripting runtime, take the following steps:
+Open PlayerSettings in the Unity Inspector by selecting Edit > Project Settings > Player > Other Settings.
+Under the Configuration heading, click the Api compatibility Level dropdown and select .NET Framework. You'll be prompted to restart Unity.
+
 ## Usage
 
 Connect your HatsuHand Mk.I to your PC. And turn on start the program. Use this GUI interface to control a HatsuHand Mk.I with following functionalities and individual finger adjustments.
