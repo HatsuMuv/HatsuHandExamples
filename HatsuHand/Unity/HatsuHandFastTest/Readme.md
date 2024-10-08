@@ -5,7 +5,7 @@
 
 This Unity project is designed to simulate its operation and a control GUI. You can try build version [here](./Build/HatsuHandFastTest_Build.7z)
 
-![GUI for HatsuHandMk.I](./images/demo.png)
+![GUI for HatsuHand](./images/demo.png)
 
 ## Demo Scene
 
@@ -16,19 +16,19 @@ The demo scene is located at the following path:
 
 - Unity 2020.3 or later
 - [DOTween](http://dotween.demigiant.com/)
-- HatsuHand Mk.I with Maestro USB control interface
+- HatsuHand with Maestro USB control interface
 
-## Project Setup
+## Project Setup Prerequirements
 
 **Enabling the .NET 4.x scripting runtime in Unity**
 
-To enable the .NET 4.x scripting runtime, take the following steps:
-Open PlayerSettings in the Unity Inspector by selecting Edit > Project Settings > Player > Other Settings.
-Under the Configuration heading, click the Api compatibility Level dropdown and select .NET Framework. You'll be prompted to restart Unity.
+You will need to setup .NET 4.X support in order to start. To enable the .NET 4.x scripting runtime, take the following steps:
+- Open PlayerSettings in the Unity Inspector by selecting Edit > Project Settings > Player > Other Settings.
+- Under the Configuration heading, click the Api compatibility Level dropdown and select .NET Framework. You'll be prompted to restart Unity.
 
 ## Usage
 
-Connect your HatsuHand Mk.I to your PC. And turn on start the program. Use this GUI interface to control a HatsuHand Mk.I with following functionalities and individual finger adjustments.
+Connect your HatsuHand to your PC. And turn on start the program. Use this GUI interface to control a HatsuHand  with following functionalities and individual finger adjustments.
 
 - **OpenHand**:
   - This button will command the hand to open fully, extending all fingers.
