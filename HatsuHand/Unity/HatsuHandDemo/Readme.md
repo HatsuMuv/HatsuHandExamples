@@ -3,7 +3,7 @@
 
 ## Overview
 
-This Unity project is designed to simulate its operation and a control GUI. You can try build version [here](./Build/HatsuHandFastTest_Build.7z)
+This Unity demo is designed to simulate its operation and a control GUI. You can try build version [here](./Build/HatsuHandFastTest_Build.7z)
 
 ![GUI for HatsuHand](./images/demo.png)
 

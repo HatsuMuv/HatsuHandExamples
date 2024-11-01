@@ -1,4 +1,4 @@
-/*  MaestroEasyExample:
+﻿/*  MaestroEasyExample:
  *    Simple example GUI for the Maestro USB Servo Controller, written in
  *    Visual C#.
  *    
@@ -19,32 +19,47 @@ using Pololu.UsbWrapper;
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Text;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Runtime.InteropServices;
 
-public class PololuConnecter : MonoBehaviour
+public class MainWindow : MonoBehaviour
 {
-    private const int MIN_LIMIT = 4000;
+    private int MIN_LIMIT = 4096;
+    private int MIN_FOURFINGERS_LIMIT = 5000;
+    private int MIN_LEFTSUM_LIMIT = 6600;
+    private int MAX_SUM_LIMIT = 8000;
+    private int MAX_LIMIT = 8384;
 
-    private const int MAX_LIMIT = 8000;
-
-    public void Test()
+    public enum Target
     {
-        StartCoroutine(TestCoroutine());
+        LeftHand,
+        RightHand,
     }
 
-    private IEnumerator TestCoroutine()
+    public void MoveRightFinger(int i, int goalint)
     {
-        TrySetTarget((Byte)0, 8000);
-
-        yield return new WaitForSeconds(1);
-
-        TrySetTarget((Byte)0, 6000);
+        Byte Fnum = (Byte)i;
+        float goalfloat = MIN_LIMIT;
+        if (i != 4) goalfloat = Remap((float)goalint, 0f, 60f, (float)MIN_FOURFINGERS_LIMIT, (float)MAX_LIMIT);
+        else goalfloat = Remap((float)goalint, 0f, 60f, (float)MIN_FOURFINGERS_LIMIT, (float)MAX_SUM_LIMIT);
+        UInt16 goal = (ushort)goalfloat;
+        //Debug.Log(Fnum + "+," + goal);
+        TrySetTarget(Fnum, goal, Target.RightHand);
     }
 
-    public void MoveFingerWithParam(int fingerNum, float param)
+    public void MoveLeftFinger(int i, int goalint)
     {
-        TrySetTarget((Byte)fingerNum, (UInt16)Remap(param, 0, 1, MIN_LIMIT, MAX_LIMIT));
+        Byte Fnum = (Byte)i;
+        float goalfloat = MIN_LIMIT;
+        if (i != 4) goalfloat = Remap((float)goalint, 0f, 60f, (float)MIN_LIMIT, (float)MAX_LIMIT);
+        else goalfloat = Remap((float)goalint, 0f, 60f, (float)MIN_LEFTSUM_LIMIT, (float)MAX_SUM_LIMIT);
+        UInt16 goal = (ushort)goalfloat;
+        //Debug.Log(Fnum + "+," + goal);
+        TrySetTarget(Fnum, goal, Target.LeftHand);
     }
 
     public float Remap(float value, float from1, float to1, float from2, float to2)
@@ -60,11 +75,11 @@ public class PololuConnecter : MonoBehaviour
     ///   Target, in units of quarter microseconds.  For typical servos,
     ///   6000 is neutral and the acceptable range is 4000-8000.
     /// </param>
-    public void TrySetTarget(Byte channel, UInt16 target)
+    public void TrySetTarget(Byte channel, UInt16 target, Target t)
     {
         try
         {
-            using (Usc device = ConnectToDevice())  // Find a device and temporarily connect.
+            using (Usc device = connectToDevice(t))  // Find a device and temporarily connect.
             {
                 device.setTarget(channel, target);
 
@@ -85,13 +100,29 @@ public class PololuConnecter : MonoBehaviour
     /// other processes or functions can connect to the device later.  The
     /// "using" statement can do this automatically for you.
     /// </summary>
-    Usc ConnectToDevice()
+    Usc connectToDevice(Target t)
     {
         // Get a list of all connected devices of this type.
         List<DeviceListItem> connectedDevices = Usc.getConnectedDevices();
 
         foreach (DeviceListItem dli in connectedDevices)
         {
+            // If you have multiple devices connected and want to select a particular
+            // device by serial number, you could simply add a line like this:
+            if (t == Target.LeftHand)
+            {
+                if (dli.serialNumber != "00400211") { continue; }
+            }
+            else if (t == Target.RightHand)
+            {
+                if (dli.serialNumber != "00400209") { continue; }
+            }
+            else
+            {
+                Debug.Log("[Pololu] Undefinded Target!");
+                continue;
+            }
+
             Usc device = new Usc(dli); // Connect to the device.
             return device;             // Return the device.
         }

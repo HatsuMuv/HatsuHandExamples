@@ -2,17 +2,19 @@
 from lib.maestro import Controller
 import serial
 import serial.tools.list_ports
-import time
 
 class RobotHandAPI:
 	def __init__(self,device=0x0c):
 		# Initialize the Maestro controller
-		ttyStr = self.find_pololu_port()
+
+		ttyStr, _ = self.find_pololu_port()
 		if ttyStr is None:
 			raise Exception("No Pololu device found!")
 
-		self.controller = Controller(ttyStr, device)
-		print("Connected to Pololu device on port:", ttyStr)
+		self.controller = None
+		if ttyStr is not None:
+			self.controller = Controller(ttyStr, device)
+			print("Connected to Pololu device on port:", ttyStr)
 
 		# Define channels for each motor (assuming channels 0-4 for your 5 DOF hand)
 		self.channels = [0, 1, 2, 3, 4]
@@ -36,6 +38,7 @@ class RobotHandAPI:
 		#Auto-detect Pololu device port based on VID and PID
 		pololu_vid = '1FFB'  # Pololu VID
 		pololu_pids = ['0089', '008A', '008B', '008C']  # PID list for Pololu device
+		pololu_serials = []
 
 		ports = list(serial.tools.list_ports.comports())
 		for port in ports:
@@ -43,8 +46,9 @@ class RobotHandAPI:
 				# Check if the port is connected to Pololu device with PID and VID
 				if f"{port.vid:04X}" == pololu_vid and f"{port.pid:04X}" in pololu_pids:
 					print(f"Found Pololu device: {port.device}")
-					return port.device
-		return None
+					pololu_serials.append(port.device)
+					return port.device, pololu_serials
+		return None, pololu_serials
 
 	def close(self):
 		# Close the controller's connection
@@ -137,42 +141,3 @@ class RobotHandAPI:
 		Stops all motor movements by stopping the script running on the Maestro.
 		"""
 		self.controller.stopScript()
-
-# Example usage with context manager
-if __name__ == "__main__":
-	try:
-		with RobotHandAPI() as hand:
-			for chan in hand.channels:
-				hand.set_motor_speed(chan, 60)       # Set speed for each motor
-				hand.set_motor_acceleration(chan, 10) # Set acceleration for each motor
-
-			#binary_number_list = []
-			#for i in range(1,16):
-			#    binary_number_list.append("".join(reversed(f'{i:0=4b}')))
-			#print(binary_number_list)
-			#
-			#for bin in binary_number_list:
-			#    for i in range(4):
-			#        hand.set_motor_position(i, 4000 if bin[i] == '1' else 8000)
-			#    time.sleep(1.5)
-
-			fingers = [0, 1, 2, 3] 
-			close_position = 8000  
-			open_position = 4000   
-			delay = 0.3 
-
-			for i in range(3):
-				for finger in fingers:
-					hand.set_motor_position(finger, close_position)
-					time.sleep(delay)
-
-				for finger in fingers:
-					hand.set_motor_position(finger, open_position)
-					time.sleep(delay) 
-				time.sleep(delay)
-
-			# Check motor position and if it's moving
-			print(hand.get_motor_position(1))
-			print(hand.is_motor_moving(0))
-	except Exception as e:
-		print(f"An error occurred: {e}")
