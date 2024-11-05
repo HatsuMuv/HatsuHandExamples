@@ -4,17 +4,17 @@ import serial
 import serial.tools.list_ports
 
 class RobotHandAPI:
-	def __init__(self,device=0x0c):
+	def __init__(self,index,device=0x0c):
 		# Initialize the Maestro controller
 
 		ttyStr, _ = self.find_pololu_port()
-		if ttyStr is None:
+		if not ttyStr:
 			raise Exception("No Pololu device found!")
 
 		self.controller = None
-		if ttyStr is not None:
-			self.controller = Controller(ttyStr, device)
-			print("Connected to Pololu device on port:", ttyStr)
+		if ttyStr[index]:
+			self.controller = Controller(ttyStr[index], device)
+			print("Connected to Pololu device on port:", ttyStr[index])
 
 		# Define channels for each motor (assuming channels 0-4 for your 5 DOF hand)
 		self.channels = [0, 1, 2, 3, 4]
@@ -34,21 +34,24 @@ class RobotHandAPI:
 		"""
 		self.close()
 
+	
 	def find_pololu_port(self):
 		#Auto-detect Pololu device port based on VID and PID
 		pololu_vid = '1FFB'  # Pololu VID
 		pololu_pids = ['0089', '008A', '008B', '008C']  # PID list for Pololu device
+		pololu_devices = []
 		pololu_serials = []
 
 		ports = list(serial.tools.list_ports.comports())
 		for port in ports:
 			if port.vid is not None and port.pid is not None:
 				# Check if the port is connected to Pololu device with PID and VID
-				if f"{port.vid:04X}" == pololu_vid and f"{port.pid:04X}" in pololu_pids:
-					print(f"Found Pololu device: {port.device}")
-					pololu_serials.append(port.device)
-					return port.device, pololu_serials
-		return None, pololu_serials
+				if f"{port.vid:04X}" == pololu_vid and f"{port.pid:04X}" in pololu_pids and "Command" in port.description:
+					if not port.serial_number in pololu_serials:
+						pololu_devices.append(port.device)
+						pololu_serials.append(port.serial_number)
+
+		return pololu_devices, pololu_serials
 
 	def close(self):
 		# Close the controller's connection
