@@ -27,6 +27,22 @@ class HandTracker:
             "Ring": 40.0,
             "Pinky": 40.0
         }
+        self.bending_percentage = {
+            "Left": {
+                "Thumb": 0.0,
+                "Index": 0.0,
+                "Middle": 0.0,
+                "Ring": 0.0,
+                "Pinky": 0.0
+            },
+            "Right": {
+                "Thumb": 0.0,
+                "Index": 0.0,
+                "Middle": 0.0,
+                "Ring": 0.0,
+                "Pinky": 0.0
+            }
+        }
 
     def set_fully_extended(self, digit_name, angle):
         """ Set the fully extended angle for a given finger. """
@@ -43,12 +59,8 @@ class HandTracker:
         elif angle >= bent:
             return 100.0  # Fully bent
 
-        #per = 100*(angle-extended)/(bent-extended)
-
-
         else:
             return ((angle-extended) / (bent - extended)) * 100
-
     
     def set_tracking_mode(self, tracking_mode):
         self.tracking_mode = tracking_mode
@@ -73,7 +85,6 @@ class HandTracker:
     
         return angle_deg
 
-
     def process_hand_data(self, event):
         if len(event.hands) == 0:
             return
@@ -93,12 +104,10 @@ class HandTracker:
                 vec1 = (intermediate.x - proximal.x, intermediate.y - proximal.y, intermediate.z - proximal.z)
                 vec2 = (distal.x - intermediate.x, distal.y - intermediate.y, distal.z - intermediate.z)
                 angle = self.calculate_angle_between_vectors(vec1,vec2)
-                percentage = self.calculate_bend_percentage(angle,self.extended_angle[digit_name],self.bent_angle[digit_name])
-                print(f"{hand_type} {digit_name} Angle:{angle} Percentage:{percentage}%")
-                
-
-            
-            
+                self.bending_percentage[hand_type][digit_name] = self.calculate_bend_percentage(
+                    angle, self.extended_angle[digit_name], self.bent_angle[digit_name]
+                )
+                print(f"{hand_type} {digit_name} Angle:{angle} Percentage:{self.bending_percentage[hand_type][digit_name]}%")
 
 class HandTrackingListener(leap.Listener):
     def __init__(self, hand_tracker):
@@ -119,6 +128,7 @@ class HandTrackingListener(leap.Listener):
     def on_tracking_event(self, event):
         self.hand_tracker.process_hand_data(event)
 
+
 def main():
     hand_tracker = HandTracker()
     tracking_listener = HandTrackingListener(hand_tracker)
@@ -130,7 +140,7 @@ def main():
     with connection.open():
         connection.set_tracking_mode(leap.TrackingMode.Desktop)
         while running:
-            time.sleep(5)
+            time.sleep(0.5)
 
 
 if __name__ == "__main__":

@@ -26,6 +26,22 @@ class HandTracker:
             "Ring": 50.0,
             "Pinky": 50.0
         }
+        self.bending_percentage = {
+            "Left": {
+                "Thumb": 0.0,
+                "Index": 0.0,
+                "Middle": 0.0,
+                "Ring": 0.0,
+                "Pinky": 0.0
+            },
+            "Right": {
+                "Thumb": 0.0,
+                "Index": 0.0,
+                "Middle": 0.0,
+                "Ring": 0.0,
+                "Pinky": 0.0
+            }
+        }
 
     def set_fully_extended(self, digit_name, distance):
         """ Set the fully extended distance for a given finger. """
@@ -69,12 +85,13 @@ class HandTracker:
                         (last_joint.y - first_joint.y) ** 2 +
                         (last_joint.z - first_joint.z) ** 2
                     )
-                    print(f"{hand_type} {digit_name} distance between first and last joint: {distance:.2f}")
+                    #print(f"{hand_type} {digit_name} distance between first and last joint: {distance:.2f}")
                     # Calculate the bending percentage
                     extended_distance = self.extended_distances[digit_name]
                     bent_distance = self.bent_distances[digit_name]
-                    bend_percentage = self.calculate_bend_percentage(distance, extended_distance, bent_distance)
-                    print(f"{hand_type} {digit_name} bend: {bend_percentage:.2f}%")
+                    self.bending_percentage[hand_type][digit_name] = self.calculate_bend_percentage(distance, extended_distance, bent_distance)
+                    print(f"{hand_type} {digit_name} Percentage:{self.bending_percentage[hand_type][digit_name]}%")
+                    
             
 
 class HandTrackingListener(leap.Listener):

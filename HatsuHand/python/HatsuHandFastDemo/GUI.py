@@ -1,8 +1,7 @@
-from lib.HandControl import HatsuHandControl as HandControl
+from HandControl import HatsuHandControl as HandControl
 from lib.HatsuHandAPI import RobotHandAPI
 import tkinter as tk
 import time
-#from IPython.terminal.debugger import set_trace as keyboard
 
 class HatsuHandGUI:
 	def __init__(self):
@@ -99,7 +98,6 @@ class HatsuHandGUI:
 
 	def Update(self):
 		_, currentPololuSerials = RobotHandAPI.__new__(RobotHandAPI).find_pololu_port()
-		#_, currentPololuSerials = RobotHandAPI.find_pololu_port()
 
 		if(self.PololuSerials != currentPololuSerials):
 			if self.hand is not None:
@@ -140,7 +138,7 @@ class HatsuHandGUI:
 
 	def UpdateButton(self):
 		if self.hand is None:
-				self.button1.config(state=tk.DISABLED)  # ƒ{ƒ^ƒ“‚ð–³Œø‰»
+				self.button1.config(state=tk.DISABLED) 
 				self.button2.config(state=tk.DISABLED)
 				self.button3.config(state=tk.DISABLED)
 				self.button4.config(state=tk.DISABLED)

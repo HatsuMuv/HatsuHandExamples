@@ -1,4 +1,4 @@
-# HatsuHand Mk.I Example
+# HatsuHand Fast Demo
 
 This project provides an example code for controlling a 5-DOF robot hand using a Pololu Maestro servo motor controller. The example includes a GUI that demonstrates basic hand movements such as opening, closing, performing a finger wave, and counting in binary using the hand's fingers.
 
