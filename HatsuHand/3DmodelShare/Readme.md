@@ -1,11 +1,17 @@
-# 3D Model For HatsuHand
+# 3D Model Files for HatsuHand
 
-Here are some useful STEP files for HatsuHand user.
+Welcome to the **3D Model Files** folder for **HatsuHand** users! Here, you will find essential STEP files designed to enhance your experience with HatsuHand, offering flexibility in customization and integration. These files are provided to assist in the attachment, modification, and sensor integration for HatsuHand.
 
-- **Mount Connector.step**: The connector part for you to connect hand to your own wrist.
-- **Finger Tips**
- - IndexFingerTip.step
- - MiddleFingerTip.step
- - RingFingerTip.step
- - PinkyFingerTip.step
- - ThumbFingerTip.step
+## Contents
+
+- ### **Mount Connector.step**
+  The **Mount Connector** is the core part to securely connect HatsuHand to your custom wrist or robotic arm. This model provides the required interface for stable and adjustable mounting.
+
+- ### **Finger Tips**
+  Each finger tip model is provided to enable customization. These can be modified to embed sensors or adapt to specific application needs.
+
+  - **IndexFingerTip.step**
+  - **MiddleFingerTip.step**
+  - **RingFingerTip.step**
+  - **PinkyFingerTip.step**
+  - **ThumbFingerTip.step**
