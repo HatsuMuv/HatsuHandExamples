@@ -241,14 +241,13 @@ public class HatsuHandControlAndGUISystem : MonoBehaviour
 
     void OnGUI()
     {
-        // フォントサイズやスタイルを設定する
         GUIStyle greenStyle = new GUIStyle();
         GUIStyle redStyle = new GUIStyle();
-        greenStyle.fontSize = 60; // フォントサイズを設定
-        greenStyle.normal.textColor = Color.green; // 文字の色を設定
-        redStyle.fontSize = 60; // フォントサイズを設定
-        redStyle.normal.textColor = Color.red; // 文字の色を設定
-        // 画面に文字を描画する（位置はx=10, y=10に設定）
+        greenStyle.fontSize = 60; 
+        greenStyle.normal.textColor = Color.green;
+        redStyle.fontSize = 60; 
+        redStyle.normal.textColor = Color.red; 
+
 
 
         (string,GUIStyle) PololuMessage = ("Pololu: Online",greenStyle);
@@ -257,7 +256,9 @@ public class HatsuHandControlAndGUISystem : MonoBehaviour
             PololuMessage = ("Pololu: Offline",redStyle);
         }
 
-        (string, GUIStyle) CurrentPololuDevice = ("Current Pololu Device: " + PololuDeviceSerialNumberList[currentPololuDeviceIndex], greenStyle);
+        string CurrentDeviceString = "";
+        if (PololuDeviceSerialNumberList.Count == 0) CurrentDeviceString = "None";
+        (string, GUIStyle) CurrentPololuDevice = ("Current Pololu Device: " + CurrentDeviceString, greenStyle);
         if(PololuDeviceSerialNumberList.Count == 0)
         {
             CurrentPololuDevice = ("Current Pololu Device: None", redStyle);
