@@ -15,6 +15,7 @@ This project provides a Python-based control system for a robotic hand using Lea
  - For Linux: Please follow [here](https://docs.ultraleap.com/linux/)
 
 
+
 2. **Leap Motion SDK**: You need to have Leap Motion's SDK set up with Python bindings.
    - Install the Python bindings for LeapC as described in the [LeapC Python Bindings Repository](https://github.com/ultraleap/leapc-python-bindings).
 
@@ -67,6 +68,10 @@ This project provides a Python-based control system for a robotic hand using Lea
 - Ensure that the Leap Motion SDK and Python bindings are installed correctly and that the device is recognized.
 - Verify that the Pololu Maestro Controller is correctly connected to your computer and robotic hand.
 - Check serial connections and device ports if the hand is not responding to Leap Motion data.
+
+## Contact
+
+If you have any questions or need support, please reach out via the [HatsuMuv Discord](https://discord.gg/JbysAbJWCN).
 
 ## License
 

@@ -95,6 +95,9 @@ Once the application is running, use the following controls:
 ```bash
 pip install -r requirements.txt
 ```
+## Contact
+
+If you have any questions or need support, please reach out via the [HatsuMuv Discord](https://discord.gg/JbysAbJWCN).
 
 ## License
 This project is licensed under the MIT License.
