@@ -27,9 +27,9 @@ This project provides a Python-based control system for a robotic hand using Lea
 
 1. **Clone this Repository** and install required Python packages:
    ```bash
-   git clone https://github.com/your-username/HatsuHandLeapControl.git
-   cd HatsuHandLeapControl
-   pip install numpy pyserial
+   git clone https://github.com/HatsuMuv/HatsuHandExamples.git
+   cd HatsuHand/python/HatsuHandLeapControl
+   pip install -r requirements.txt
    ```
 
 2. **Set Up Leap Motion Python Bindings**:
