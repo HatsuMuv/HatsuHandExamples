@@ -15,3 +15,9 @@ Welcome to the **3D Model Files** folder for **HatsuHand** users! Here, you will
   - **RingFingerTip.step**
   - **PinkyFingerTip.step**
   - **ThumbFingerTip.step**
+
+- ### **Adapters**
+  Adapters for different robot arm or motors
+
+  - **AdapterForUR5e.step** : An adapter for connecting to UR5e robot arm
+  
