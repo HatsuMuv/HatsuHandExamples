@@ -2,7 +2,6 @@
 from lib.maestro import Controller
 import serial
 import serial.tools.list_ports
-from IPython.terminal.debugger import set_trace as keyboard
 
 class RobotHandAPI:
 	def __init__(self,index,device=0x0c):
@@ -44,21 +43,13 @@ class RobotHandAPI:
 		pololu_serials = []
 
 		ports = list(serial.tools.list_ports.comports())
-		print(ports)
 		for port in ports:
 			if port.vid is not None and port.pid is not None:
 				# Check if the port is connected to Pololu device with PID and VID
-				if f"{port.vid:04X}" == pololu_vid:
-					#print(port.vid)
-					#print(port.description)
-					#print(port.serial_number)
-					#print(port.pid)
-					#print(port.hwid)
-					if f"{port.pid:04X}" in pololu_pids: 
-						if ("Command" in port.description or "LOCATION" not in port.hwid):
-							if not port.serial_number in pololu_serials:
-								pololu_devices.append(port.device)
-								pololu_serials.append(port.serial_number)
+				if f"{port.vid:04X}" == pololu_vid and f"{port.pid:04X}" in pololu_pids and "Command" in port.description:
+					if not port.serial_number in pololu_serials:
+						pololu_devices.append(port.device)
+						pololu_serials.append(port.serial_number)
 
 		return pololu_devices, pololu_serials
 
