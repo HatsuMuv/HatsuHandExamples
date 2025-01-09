@@ -1,7 +1,7 @@
 import sys
 sys.path.append("..")
 
-from Lib.HatsuHandAPI import RobotHandAPI
+from lib.HatsuHandAPI import RobotHandAPI
 from GUI import HatsuHandGUI
 
 

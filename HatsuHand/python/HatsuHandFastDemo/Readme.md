@@ -30,6 +30,7 @@ This gif showcases the robot hand counting in binary, a demonstration of precise
 ## Prerequisites
 
 - Python 3.x
+- Pololu Maestro Servo Controller ![Windows](https://www.pololu.com/docs/0J40/3.a) / ![Linux](https://www.pololu.com/docs/0J40/3.b)
 - Pololu Maestro servo motor controller with 5 DOF robot hand
 
 ### Python Packages
@@ -47,9 +48,13 @@ The following packages are required:
 
 ## File Overview
 - **HatsuHandFastDemo.py**: Main script that launches the GUI for controlling the robot hand. It uses the RobotHandAPI class to interface with the Pololu Maestro controller.
-- **HatsuHandAPI.py**: Defines the RobotHandAPI class, which abstracts the functions needed to control the robot hand's servos.
 - **HatsuHandFastDemo.bat**: Windows batch file to execute the demo for testing purposes.
 - **requirements.txt**: Python dependencies for the project.
+
+
+## Setup Your Controller
+Pololu's Maestro Windows installer sets up the Maestro Control Center, used to configure, test and program the controller. Be sure the Maestro is configured for "USB Dual Port" serial mode, which is not the default.
+
 
 ## How to Run
 - Connect the Pololu Maestro controller to your PC.
