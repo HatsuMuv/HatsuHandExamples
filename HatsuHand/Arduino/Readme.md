@@ -27,7 +27,7 @@ This repository contains the Arduino code used to control the **HatsuHand** robo
 
 ## Pin Configuration
 
-![Pin Configuration](block.png)
+![Pin Configuration](./block.png)
 
 | Component         | Arduino Pin |
 |--------------------|-------------|
