@@ -53,12 +53,12 @@ class RobotHandAPI:
 
 				if f"{port.vid:04X}" == pololu_vid and f"{port.pid:04X}" in pololu_pids:
 					pololu_port_count += 1				
-					print("Found Pololu Comport:","Device:"+port.device,f"VID:{port.vid:04X}", f"PID:{port.pid:04X}", "Desc:"+port.description, "SN:"+port.serial_number, "Loc:"+port.location, "Hwid:" + port.hwid)
+					#print("Found Pololu Comport:","Device:"+port.device,f"VID:{port.vid:04X}", f"PID:{port.pid:04X}", "Desc:"+port.description, "SN:"+port.serial_number, "Loc:"+port.location, "Hwid:" + port.hwid)
 					#if port.serial_number not in pololu_serials:
 					pololu_devices.append(port.device)
 					pololu_serials.append(port.serial_number)
 
-		print("Found Pololu devices numbers:", len(pololu_devices))
+		#print("Found Pololu devices numbers:", len(pololu_devices))
 		return pololu_devices, pololu_serials
 
 	def close(self):
