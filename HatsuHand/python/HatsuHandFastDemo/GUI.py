@@ -14,8 +14,9 @@ class HatsuHandGUI:
 			self.hand.set_motor_acceleration(chan, 10)
 
 		self.handControl = HandControl(self.hand)
-		_, self.PololuSerials = self.hand.find_pololu_port()
+		self.deviceNames, self.PololuSerials = self.hand.find_pololu_port()
 		self.connectingSerial = self.PololuSerials[self.connectingSerialIndex]
+		self.connectingDevice = self.deviceNames[self.connectingSerialIndex]
 
 		self.root = self.CreateGUI()
 
@@ -58,13 +59,14 @@ class HatsuHandGUI:
 		connection_title.pack(pady=(10, 0))  # Title at the top
 
 		deviceText = "Device: \n"
-		for serial in self.PololuSerials:
-			deviceText += serial + "\n"
+		#for serial in self.PololuSerials:
+		for i in range(len(self.PololuSerials)):
+			deviceText +=  "("+ self.deviceNames[i] + ") " + self.PololuSerials[i] + "\n"
 		self.device_label = tk.Label(connection_frame, text=deviceText, font=("Arial", 12), bg="lightgray")
 		self.device_label.pack(pady=(5, 0))  # Device label below title
 
 		statusText = "Status: "
-		statusText += "Connected to " +self.connectingSerial
+		statusText += "Connected to " +"("+ self.connectingDevice + ") "+self.connectingSerial
 		self.status_label = tk.Label(connection_frame, text=statusText, font=("Arial", 12), bg="lightgray")
 		self.status_label.pack(pady=(5, 10))  # Status label below device
 
@@ -90,6 +92,7 @@ class HatsuHandGUI:
 
 			self.handControl = HandControl(self.hand)
 			self.connectingSerial = self.PololuSerials[self.connectingSerialIndex]
+			self.connectingDevice = self.deviceNames[self.connectingSerialIndex]
 
 			self.UpdateText()
 			self.UpdateButton()
@@ -97,13 +100,14 @@ class HatsuHandGUI:
 		
 
 	def Update(self):
-		_, currentPololuSerials = RobotHandAPI.__new__(RobotHandAPI).find_pololu_port()
+		currentPololuDevices, currentPololuSerials = RobotHandAPI.__new__(RobotHandAPI).find_pololu_port()
 
 		if(self.PololuSerials != currentPololuSerials):
 			if self.hand is not None:
 				self.hand.close()
 
 			time.sleep(0.5)
+			self.deviceNames = currentPololuDevices
 			self.PololuSerials = currentPololuSerials
 
 			if len(self.PololuSerials) == 0:
@@ -116,6 +120,7 @@ class HatsuHandGUI:
 
 				self.handControl = HandControl(self.hand)
 				self.connectingSerial = self.PololuSerials[self.connectingSerialIndex]
+				self.connectingDevice = self.deviceNames[self.connectingSerialIndex]
 
 			self.UpdateText()
 			self.UpdateButton()
@@ -128,12 +133,12 @@ class HatsuHandGUI:
 			self.status_label.config(text="Status: Disconnected")
 		else:
 			deviceText = "Device: \n"
-			for serial in self.PololuSerials:
-				deviceText += serial + "\n"
+			for i in range(len(self.PololuSerials)):
+				deviceText +=  "("+ self.deviceNames[i] + ") " + self.PololuSerials[i] + "\n"
 			self.device_label.config(text=deviceText)
 
 			statusText = "Status: "
-			statusText += "Connected to " +self.connectingSerial
+			statusText += "Connected to " +"("+ self.connectingDevice + ") "+self.connectingSerial
 			self.status_label.config(text=statusText)
 
 	def UpdateButton(self):
