@@ -2,7 +2,7 @@ import sys
 sys.path.append("..")
 
 import time
-from Lib.HatsuHandAPI import RobotHandAPI
+from lib.HatsuHandAPI import RobotHandAPI
 
 
 class HatsuHandControl():
