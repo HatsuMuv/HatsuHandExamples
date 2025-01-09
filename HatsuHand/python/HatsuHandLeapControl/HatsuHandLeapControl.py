@@ -1,11 +1,12 @@
 import sys
 sys.path.append("..")
 
+from lib.HatsuHandAPI import RobotHandAPI
+
 import leap
 import time
 import numpy as np
 from FingerBendingFingerBendBasedDetector import HandTracker
-from Lib.HatsuHandAPI import RobotHandAPI
 
 class HandControl:
     def __init__(self, hand):
