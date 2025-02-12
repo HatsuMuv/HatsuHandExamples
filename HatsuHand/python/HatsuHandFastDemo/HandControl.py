@@ -6,7 +6,7 @@ from lib.HatsuHandAPI import RobotHandAPI
 
 
 close_position = 8000
-open_position = 4000
+open_position = 4300
 
 class HatsuHandControl():
 	def __init__(self,hand : RobotHandAPI):
@@ -30,8 +30,6 @@ class HatsuHandControl():
 	def FingerWave(self):
 		print("Waving")
 		fingers = [0, 1, 2, 3]
-		close_position = 8000
-		open_position = 4000
 		delay = 0.3
 
 		for i in range(3):

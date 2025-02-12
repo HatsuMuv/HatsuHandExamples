@@ -7,13 +7,17 @@ import numpy as np
 from FingerBendingFingerBendBasedDetector import HandTracker
 from Lib.HatsuHandAPI import RobotHandAPI
 
+close_position = 8000
+open_position = 4300
+
+
 class HandControl:
     def __init__(self, hand):
         self.hand = hand
 
     def move_finger_to_bend_percentage(self, motor_index, percentage):
         # Calculate target position based on bend percentage
-        min_pos, max_pos = 4000, 8000
+        min_pos, max_pos = open_position, close_position
         target_position = int(min_pos - (percentage / 100.0) * (min_pos - max_pos))
         #print(target_position)
         self.hand.set_motor_position(motor_index, target_position)
@@ -42,7 +46,7 @@ def main():
 
     # Configure motor range, speed, and acceleration for each channel
     for chan in hand.channels:
-        hand.set_motor_range(chan, 4000, 8000)
+        hand.set_motor_range(chan, open_position, close_position)
         hand.set_motor_speed(chan, 120)
         hand.set_motor_acceleration(chan, 20)
 
